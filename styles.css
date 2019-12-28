@@ -1,0 +1,15 @@
+.inputContainer {
+    display: flex;
+    width: 30%;
+    flex-direction: column;
+    align-self: left;
+    justify-content: start;
+}
+
+.boxsizingBorder {
+    width: 95%;
+    height: 90%;   
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
