@@ -14,12 +14,11 @@
   box-sizing: border-box;
 }
 
-.topbar {
-  height: 5vh;
-}
-
 .snippetsDiv {
-  height: 92vh;
+  /* height: 92vh; */
+  display: flex;
+  flex-direction: row;
+  /* justify-content: stretch; */
 }
 
 .modalDiv {
@@ -27,5 +26,9 @@
     flex-direction: column;
 }
 .inputClass {
+    margin: 5px;
+}
+
+.margin {
     margin: 5px;
 }

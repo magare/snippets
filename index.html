@@ -19,76 +19,69 @@
     <title>Snippets</title>
   </head>
   <body>
-    <div class="row snippetsDiv">
-      <div class="col-8" style="background-color: aqua;">
-        <div class="jumbotron" style="height: 89vh;">
-          <div class="container">
-            <h1 class="display-4">
-              Snippets
-
-              <!-- Button trigger modal -->
-              <button
-                type="button"
-                class="btn btn-outline-primary"
-                data-toggle="modal"
-                data-target="#exampleModalCenter"
-              >
-                Add Snippet
-              </button>
-              <!-- <div class="dropdown"> -->
-              <button
-                class="btn btn-secondary dropdown-toggle"
-                type="button"
-                id="dropdownMenuButton"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Settings
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a
-                  class="dropdown-item"
-                  href="#"
-                  onclick="addSettings('sortOrder','splitAlpha')"
-                  >Split Alphabetically</a
-                >
-                <a
-                  class="dropdown-item"
-                  href="#"
-                  onclick="addSettings('sortOrder','sortAlpha')"
-                  >Order Alphabetically</a
-                >
-                <a
-                  class="dropdown-item"
-                  href="#"
-                  onclick="addSettings('sortOrder','sortRevAlpha')"
-                  >Order Reverse Alphabetical</a
-                >
-              </div>
-              <!-- </div> -->
-            </h1>
-          </div>
-          <div class="container" id="snippetPillContainer"></div>
-        </div>
-      </div>
-      <div class="col-4">
-        <div class="jumbetron" style="height: 89vh;">
-          <div class="container" style="padding-top: 20px">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-dismiss="modal"
-              style="margin-bottom: 20px;"
-              onclick="copySnippet()"
+    <div class="snippetsDiv">
+      <div class="col-8 jumbotron container margin">
+        <h1 class="display-4">
+          Snippets
+          <!-- Button trigger modal -->
+          <button
+            type="button"
+            class="btn btn-outline-primary"
+            data-toggle="modal"
+            data-target="#exampleModalCenter"
+          >
+            Add Snippet
+          </button>
+          <button
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Settings
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a
+              class="dropdown-item"
+              href="#"
+              onclick="addSettings('sortOrder','splitAlpha')"
+              >Split Alphabetically</a
             >
-              Copy
-            </button>
-            <pre id="codeSnippet" class="jumbetron"></pre>
+            <a
+              class="dropdown-item"
+              href="#"
+              onclick="addSettings('sortOrder','sortAlpha')"
+              >Order Alphabetically</a
+            >
+            <a
+              class="dropdown-item"
+              href="#"
+              onclick="addSettings('sortOrder','sortRevAlpha')"
+              >Order Reverse Alphabetical</a
+            >
           </div>
-        </div>
+        </h1>
+        <div class="container" id="snippetPillContainer"></div>
+      </div>
+      <div class="col-4 jumbotron container margin">
+        <h1>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-dismiss="modal"
+            onclick="copySnippet()"
+          >
+            Copy
+          </button>
+        </h1>
+        <pre id="codeSnippet" class="jumbetron"></pre>
       </div>
     </div>
+
+    <!-- Alert -->
+    <div id="alert"></div>
 
     <!-- Modal -->
     <div

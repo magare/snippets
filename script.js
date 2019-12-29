@@ -34,21 +34,23 @@ addSnippet = () => {
   let name = document.getElementById("inputSnippetName").value;
   let snippet = document.getElementById("inputSnippet").value;
 
-  console.log("name snippet ", name, snippet);
-
   db.snippets
     .add({
       name: name,
       snippet: snippet
     })
     .then(response => {
-      console.log(response);
       renderAllSnippets();
       document.getElementById("inputSnippetName").value = "";
       document.getElementById("inputSnippet").value = "";
+      
+      document.getElementById('alert').innerHTML = `<div class="alert alert-success container" role="alert">Snippet ${response} has been added</div>`
+      setTimeout(()=> { document.getElementById('alert').innerHTML = ''; }, 3000);
+
     })
     .catch(error => {
-      console.log(error);
+      document.getElementById('alert').innerHTML = `<div class="alert alert-danger container" role="alert">Error in adding snippet <br> ${error.message} </div>`
+      setTimeout(()=> { document.getElementById('alert').innerHTML = ''; }, 10000);
     });
 };
 
@@ -63,7 +65,14 @@ copySnippet = () => {
         window.getSelection().removeAllRanges();
         window.getSelection().addRange(range);
     }
-    document.execCommand("copy")
+    try{
+      document.execCommand("copy")
+      document.getElementById('alert').innerHTML = `<div class="alert alert-success container" role="alert">Copied </div>`
+      setTimeout(()=> { document.getElementById('alert').innerHTML = ''; }, 3000);
+    } catch (error) {
+      document.getElementById('alert').innerHTML = `<div class="alert alert-danger container" role="alert">Can't Copy </div>`
+      setTimeout(()=> { document.getElementById('alert').innerHTML = ''; }, 3000);
+    }
 };
 
 addSettings = (item, setting) => {
