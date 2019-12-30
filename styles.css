@@ -20,13 +20,18 @@
 }
 
 .modalDiv {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 .inputClass {
-    margin: 5px;
+  margin: 5px;
 }
 
 .margin {
-    margin: 5px;
+  margin: 5px;
+}
+
+div.my_class {
+  resize: both;
+  overflow: auto; /* something other than visible */
 }

@@ -43,36 +43,79 @@ addSnippet = () => {
       renderAllSnippets();
       document.getElementById("inputSnippetName").value = "";
       document.getElementById("inputSnippet").value = "";
-      
-      document.getElementById('alert').innerHTML = `<div class="alert alert-success container" role="alert">Snippet ${response} has been added</div>`
-      setTimeout(()=> { document.getElementById('alert').innerHTML = ''; }, 3000);
 
+      document.getElementById(
+        "alert"
+      ).innerHTML = `<div class="alert alert-success container" role="alert">Snippet ${response} has been added</div>`;
+      setTimeout(() => {
+        document.getElementById("alert").innerHTML = "";
+      }, 3000);
     })
     .catch(error => {
-      document.getElementById('alert').innerHTML = `<div class="alert alert-danger container" role="alert">Error in adding snippet <br> ${error.message} </div>`
-      setTimeout(()=> { document.getElementById('alert').innerHTML = ''; }, 10000);
+      document.getElementById(
+        "alert"
+      ).innerHTML = `<div class="alert alert-danger container" role="alert">Error in adding snippet <br> ${error.message} </div>`;
+      setTimeout(() => {
+        document.getElementById("alert").innerHTML = "";
+      }, 10000);
+    });
+};
+
+// Removing snippet from db
+removeSnippet = () => {
+  let name = document.getElementById("removeSnippetName").value;
+
+  db.snippets
+    .delete(name)
+    .then(response => {
+      renderAllSnippets();
+      document.getElementById("removeSnippetName").value = "";
+
+      document.getElementById(
+        "alert"
+      ).innerHTML = `<div class="alert alert-success container" role="alert">Snippet ${response} has been removed</div>`;
+      setTimeout(() => {
+        document.getElementById("alert").innerHTML = "";
+      }, 3000);
+    })
+    .catch(error => {
+      document.getElementById(
+        "alert"
+      ).innerHTML = `<div class="alert alert-danger container" role="alert">Error in removing snippet <br> ${error.message} </div>`;
+      setTimeout(() => {
+        document.getElementById("alert").innerHTML = "";
+      }, 10000);
     });
 };
 
 copySnippet = () => {
-    if (document.selection) { // IE
-        let range = document.body.createTextRange();
-        range.moveToElementText(document.getElementById('codeSnippet'));
-        range.select();
-    } else if (window.getSelection) {
-        let range = document.createRange();
-        range.selectNode(document.getElementById('codeSnippet'));
-        window.getSelection().removeAllRanges();
-        window.getSelection().addRange(range);
-    }
-    try{
-      document.execCommand("copy")
-      document.getElementById('alert').innerHTML = `<div class="alert alert-success container" role="alert">Copied </div>`
-      setTimeout(()=> { document.getElementById('alert').innerHTML = ''; }, 3000);
-    } catch (error) {
-      document.getElementById('alert').innerHTML = `<div class="alert alert-danger container" role="alert">Can't Copy </div>`
-      setTimeout(()=> { document.getElementById('alert').innerHTML = ''; }, 3000);
-    }
+  if (document.selection) {
+    // IE
+    let range = document.body.createTextRange();
+    range.moveToElementText(document.getElementById("codeSnippet"));
+    range.select();
+  } else if (window.getSelection) {
+    let range = document.createRange();
+    range.selectNode(document.getElementById("codeSnippet"));
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+  }
+  try {
+    document.execCommand("copy");
+    document.getElementById(
+      "alert"
+    ).innerHTML = `<div class="alert alert-success container" role="alert">Copied </div>`;
+    setTimeout(() => {
+      document.getElementById("alert").innerHTML = "";
+    }, 3000);
+  } catch (error) {
+    document.getElementById(
+      "alert"
+    ).innerHTML = `<div class="alert alert-danger container" role="alert">Can't Copy </div>`;
+    setTimeout(() => {
+      document.getElementById("alert").innerHTML = "";
+    }, 3000);
+  }
 };
 
 addSettings = (item, setting) => {

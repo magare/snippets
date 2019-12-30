@@ -16,11 +16,12 @@
     <script src="dexie.min.js"></script>
     <script src="script.js"></script>
     <link href="styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="ft-syntax-highlight.min.css" />
     <title>Snippets</title>
   </head>
   <body>
     <div class="snippetsDiv">
-      <div class="col-8 jumbotron container margin">
+      <div class="jumbotron container margin my_class">
         <h1 class="display-4">
           Snippets
           <!-- Button trigger modal -->
@@ -32,16 +33,15 @@
           >
             Add Snippet
           </button>
-          <!-- <button
-            class="btn btn-secondary dropdown-toggle"
+          <button
             type="button"
-            id="dropdownMenuButton"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
+            class="btn btn-outline-primary"
+            data-toggle="modal"
+            data-target="#exampleModalCenterDelete"
           >
-            Settings
-          </button> -->
+            Remove Snippet
+          </button>
+
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a
               class="dropdown-item"
@@ -65,7 +65,7 @@
         </h1>
         <div class="container" id="snippetPillContainer"></div>
       </div>
-      <div class="col-4 jumbotron container margin">
+      <div class="jumbotron container margin my_class">
         <h1>
           <button
             type="button"
@@ -76,7 +76,12 @@
             Copy
           </button>
         </h1>
-        <pre id="codeSnippet" class="jumbetron"></pre>
+        <pre
+          id="codeSnippet"
+          class="ft-syntax-highlight"
+          data-syntax-theme="midnight"
+          style="padding: 5px; counter-reset: line;"
+        ></pre>
       </div>
     </div>
 
@@ -137,6 +142,59 @@
               data-dismiss="modal"
             >
               Add
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModalCenterDelete"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Add Snippet</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body modalDiv" style="height: 50vh">
+            <input
+              type="text"
+              class="form-control inputClass"
+              placeholder="Snippet name to be removed"
+              aria-label="Name"
+              aria-describedby="basic-addon1"
+              id="removeSnippetName"
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              data-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-primary"
+              onclick="removeSnippet()"
+              data-dismiss="modal"
+            >
+              Remove
             </button>
           </div>
         </div>
