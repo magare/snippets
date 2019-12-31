@@ -67,19 +67,21 @@
       </div>
       <div class="jumbotron container margin my_class">
         <h1>
-          <button
-            type="button"
-            class="btn btn-outline-secondary"
-            data-dismiss="modal"
-            onclick="copySnippet()"
-          >
-            Copy
-          </button>
+          <span>
+            <button
+              type="button"
+              class="btn btn-outline-primary"
+              data-dismiss="modal"
+              onclick="copySnippet()"
+            >
+              Copy
+            </button>
+          </span>
         </h1>
         <pre
           id="codeSnippet"
           class="ft-syntax-highlight"
-          data-syntax-theme="midnight"
+          data-syntax-theme="chrismas"
           style="padding: 5px; counter-reset: line;"
         ></pre>
       </div>
@@ -121,7 +123,7 @@
             />
 
             <textarea
-              class="boxsizingBorder inputClass"
+              class="boxsizingBorder inputClass "
               aria-label="Add your snippet here"
               autofocus="true"
               id="inputSnippet"
