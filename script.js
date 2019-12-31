@@ -7,30 +7,41 @@ db.version(1).stores({
 // Binding snippet names to snippet container
 // to do => adding sorting and grouping
 let renderAllSnippets = () => {
+  // Get the snippets
   db.snippets.toArray(response => {
     let snippetsArray = response.map(i => {
       return `
-      <span style="font-size: 130%;" onclick="handleOnClick('${i.name}')">
+      <span style="font-size: 130%;" onclick="handleOnSnippetClick('${i.name}')">
         <a href="#" class="badge badge-pill badge-primary">${i.name}</a>
       </span>
       `;
     });
-
+    // bind the snippets
     document.getElementById(
       "snippetPillContainer"
     ).innerHTML = snippetsArray.join("\n");
   });
 };
 
-// on add snippet button click
-handleOnClick = i => {
+// Invoked on Snippet pill click
+let handleOnSnippetClick = i => {
   db.snippets.get(i, response => {
     document.getElementById("codeSnippet").innerText = `${response.snippet}`;
   });
 };
 
+// For showing alert message
+let showAlertMessage = (type, message, timeout) => {
+  document.getElementById(
+    "alert"
+  ).innerHTML = `<div class="alert alert-${type} container" role="alert">${message}</div>`;
+  setTimeout(() => {
+    document.getElementById("alert").innerHTML = "";
+  }, timeout);
+};
+
 // adding snippet to db
-addSnippet = () => {
+let addSnippet = () => {
   let name = document.getElementById("inputSnippetName").value;
   let snippet = document.getElementById("inputSnippet").value;
 
@@ -41,28 +52,23 @@ addSnippet = () => {
     })
     .then(response => {
       renderAllSnippets();
+      // make the modal enteries empty
       document.getElementById("inputSnippetName").value = "";
       document.getElementById("inputSnippet").value = "";
 
-      document.getElementById(
-        "alert"
-      ).innerHTML = `<div class="alert alert-success container" role="alert">Snippet ${response} has been added</div>`;
-      setTimeout(() => {
-        document.getElementById("alert").innerHTML = "";
-      }, 3000);
+      showAlertMessage("success", `Snippet "${response}" has been added`, 3000);
     })
     .catch(error => {
-      document.getElementById(
-        "alert"
-      ).innerHTML = `<div class="alert alert-danger container" role="alert">Error in adding snippet <br> ${error.message} </div>`;
-      setTimeout(() => {
-        document.getElementById("alert").innerHTML = "";
-      }, 10000);
+      showAlertMessage(
+        "danger",
+        `Error in adding snippet <br> ${error.message} `,
+        10000
+      );
     });
 };
 
 // Removing snippet from db
-removeSnippet = () => {
+let removeSnippet = () => {
   let name = document.getElementById("removeSnippetName").value;
 
   db.snippets
@@ -71,24 +77,21 @@ removeSnippet = () => {
       renderAllSnippets();
       document.getElementById("removeSnippetName").value = "";
 
-      document.getElementById(
-        "alert"
-      ).innerHTML = `<div class="alert alert-success container" role="alert">Snippet ${response} has been removed</div>`;
-      setTimeout(() => {
-        document.getElementById("alert").innerHTML = "";
-      }, 3000);
+      // Alert success
+      showAlertMessage("success", `Snippet ${response} has been removed`, 3000);
     })
     .catch(error => {
-      document.getElementById(
-        "alert"
-      ).innerHTML = `<div class="alert alert-danger container" role="alert">Error in removing snippet <br> ${error.message} </div>`;
-      setTimeout(() => {
-        document.getElementById("alert").innerHTML = "";
-      }, 10000);
+      // Alert failure
+      showAlertMessage(
+        "danger",
+        `Error in removing snippet <br> ${error.message} `,
+        10000
+      );
     });
 };
 
-copySnippet = () => {
+// Copies the snippet shown on right hand side to the clipboard
+let copySnippet = () => {
   if (document.selection) {
     // IE
     let range = document.body.createTextRange();
@@ -102,23 +105,15 @@ copySnippet = () => {
   }
   try {
     document.execCommand("copy");
-    document.getElementById(
-      "alert"
-    ).innerHTML = `<div class="alert alert-success container" role="alert">Copied </div>`;
-    setTimeout(() => {
-      document.getElementById("alert").innerHTML = "";
-    }, 3000);
+    // Alert success
+    showAlertMessage("success", "Copied", 3000);
   } catch (error) {
-    document.getElementById(
-      "alert"
-    ).innerHTML = `<div class="alert alert-danger container" role="alert">Can't Copy </div>`;
-    setTimeout(() => {
-      document.getElementById("alert").innerHTML = "";
-    }, 3000);
+    // Alert failure
+    showAlertMessage("danger", `Can't Copy`, 3000);
   }
 };
 
-addSettings = (item, setting) => {
+let addSettings = (item, setting) => {
   db.settings.update(item, { item, setting }).then(response => {
     // If db entry is not present for settings create one
     if (!response) {
@@ -128,7 +123,6 @@ addSettings = (item, setting) => {
           setting
         })
         .then(response => {
-          console.log(response);
           renderAllSnippets();
         })
         .catch(error => {
