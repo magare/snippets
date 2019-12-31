@@ -42,8 +42,8 @@ let showAlertMessage = (type, message, timeout) => {
 
 // adding snippet to db
 let addSnippet = () => {
-  let name = document.getElementById("inputSnippetName").value;
-  let snippet = document.getElementById("inputSnippet").value;
+  let name = document.getElementById("inputSnippetName").value.trim();
+  let snippet = document.getElementById("inputSnippet").value.trim();
 
   db.snippets
     .add({
@@ -69,7 +69,7 @@ let addSnippet = () => {
 
 // Removing snippet from db
 let removeSnippet = () => {
-  let name = document.getElementById("removeSnippetName").value;
+  let name = document.getElementById("removeSnippetName").value.trim();
 
   db.snippets
     .delete(name)
