@@ -113,14 +113,18 @@
             </button>
           </div>
           <div class="modal-body modalDiv" style="height: 50vh">
-            <input
+            
+            <div style="display: flex; flex-direction: row; align-items: center;">
+              <input
               type="text"
               class="form-control inputClass"
               placeholder="Name"
               aria-label="Name"
               aria-describedby="basic-addon1"
               id="inputSnippetName"
-            />
+              />
+              <input name="Color Picker" type="color" id="picker" value="#000fff"/>
+            </div>
 
             <textarea
               class="boxsizingBorder inputClass "
@@ -137,6 +141,7 @@
             >
               Cancel
             </button>
+
             <button
               type="button"
               class="btn btn-outline-primary"

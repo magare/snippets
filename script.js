@@ -1,7 +1,7 @@
 var db = new Dexie("SnippetsDatabase");
 db.version(1).stores({
-  snippets: "name,snippet",
-  settings: "item,setting"
+  snippets: "name,snippet,properties",
+  settings: "item,setting,properties"
 });
 
 // Binding snippet names to snippet container
@@ -12,7 +12,9 @@ let renderAllSnippets = () => {
     let snippetsArray = response.map(i => {
       return `
       <span style="font-size: 130%;" onclick="handleOnSnippetClick('${i.name}')">
-        <a href="#" class="badge badge-pill badge-primary">${i.name}</a>
+        <a href="#" class="" style="background:${i.properties.color}; padding: 5px;
+         border-radius: 30px; margin:1px; color: #ffffff; font-style: oblique;
+         ">${i.name}</a>
       </span>
       `;
     });
@@ -44,17 +46,20 @@ let showAlertMessage = (type, message, timeout) => {
 let addSnippet = () => {
   let name = document.getElementById("inputSnippetName").value.trim();
   let snippet = document.getElementById("inputSnippet").value.trim();
+  let color = document.getElementById("picker").value;
 
   db.snippets
     .add({
       name: name,
-      snippet: snippet
+      snippet: snippet,
+      properties: {color}
     })
     .then(response => {
       renderAllSnippets();
       // make the modal enteries empty
       document.getElementById("inputSnippetName").value = "";
       document.getElementById("inputSnippet").value = "";
+      document.getElementById("picker").value = "#f0f0f0";
 
       showAlertMessage("success", `Snippet "${response}" has been added`, 3000);
     })
