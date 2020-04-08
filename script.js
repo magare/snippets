@@ -11,7 +11,7 @@ let renderAllSnippets = () => {
   db.snippets.toArray(response => {
     let snippetsArray = response.map(i => {
       return `
-      <span style="font-size: 130%;" onclick="handleOnSnippetClick('${i.name}')">
+      <span style="font-size: 100%; display: inline-block; padding: 5px" onclick="handleOnSnippetClick('${i.name}')">
         <a href="#" class="" style="background:${i.properties.color}; padding: 5px;
          border-radius: 30px; margin:1px; color: #ffffff; font-style: oblique;
          ">${i.name}</a>
