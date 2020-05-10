@@ -21,7 +21,7 @@ let renderAllSnippets = () => {
     // bind the snippets
     document.getElementById(
       "snippetPillContainer"
-    ).innerHTML = snippetsArray.join("\n");
+    ).innerHTML = snippetsArray.join("\n"); 
   });
 };
 
